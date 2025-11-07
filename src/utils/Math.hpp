@@ -17,10 +17,14 @@ struct Camera {
     Vec3 position{0, 0, 5};
     Vec3 front{0, 0, -1};
     Vec3 up{0, 1, 0};
+    Vec3 right{1, 0, 0};
     float yaw = -90.0f, pitch = 0.0f;
     float speed = 12.0f, sensitivity = 0.08f;
+    float lastX = 0.0f, lastY = 0.0f;
+    bool firstMouse = true;
 
-    void update(float dt);
+    void update(float dt, GLFWwindow* window);
+    void processMouse(float xpos, float ypos);
     Mat4 viewMatrix() const { return glm::lookAt(position, position + front, up); }
 };
 
